@@ -18,8 +18,8 @@ import time
 
 import tensorflow.compat.v2 as tf
 
-from keras.engine import steps_per_execution_tuning
 from keras.testing_infra import test_combinations
+from keras.utils import steps_per_execution_tuning
 
 
 class mockOptimizer:
