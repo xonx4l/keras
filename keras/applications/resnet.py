@@ -178,7 +178,7 @@ def ResNet(
     x = layers.ZeroPadding2D(padding=((3, 3), (3, 3)), name="conv1_pad")(
         img_input
     )
-    x = layers.Conv2D(64, 7, strides=2, use_bias=use_bias, name="conv1_conv")(x)
+    x = layers.Conv2D(64, 7, strides=2, use_bias=use_bias, padding='same', name="conv1_conv")(x)
 
     if not preact:
         x = layers.BatchNormalization(
@@ -186,8 +186,8 @@ def ResNet(
         )(x)
         x = layers.Activation("relu", name="conv1_relu")(x)
 
-    x = layers.ZeroPadding2D(padding=((1, 1), (1, 1)), name="pool1_pad")(x)
-    x = layers.MaxPooling2D(3, strides=2, name="pool1_pool")(x)
+    x = layers.ZeroPadding2D(padding=((1, 0), (1, 0)), name="pool1_pad")(x)
+    x = layers.MaxPooling2D(3, strides=2,padding='valid', name="pool1_pool")(x)
 
     x = stack_fn(x)
 
